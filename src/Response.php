@@ -23,7 +23,7 @@ class Response
         foreach ($this->headers as $key => $value){
             header($key.':'.$value);
         }
-        echo json_encode($this->content);
+        echo $this->content;
 
     }
 
@@ -74,7 +74,5 @@ class Response
     {
         $this->statusCode = $statusCode;
     }
-
-
 
 }
