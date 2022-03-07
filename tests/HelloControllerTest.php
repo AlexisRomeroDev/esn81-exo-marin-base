@@ -15,12 +15,13 @@ class HelloControllerTest extends TestCase
     public function test_hello(){
 
         $_GET['name'] = "Alex";
+        $_GET['age'] = "48";
 
         $controller = new HelloController();
 
         $response = $controller->sayHello();
 
-        $this->assertEquals("Hello Alex", $response->getContent());
+        $this->assertStringContainsString("Hello Alex", $response->getContent());
 
         $this->assertEquals(200, $response->getStatusCode());
 

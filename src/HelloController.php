@@ -10,9 +10,10 @@ class HelloController
     public function sayHello(){
 
        $name = $_GET['name'];
+       $age = $_GET['age'];
 
        $response = new Response(
-           "Hello ${name}",
+           "Hello ${name}, tu as ${age}",
            ['Content-Type' => 'application/json'],
            200
        );
