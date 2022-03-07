@@ -10,8 +10,8 @@ class PositionController
 
     public function displayForm(){
 
-        if(isset($_REQUEST['latitude']) && isset($_REQUEST['longitude'])) {
-            $position = new Point($_REQUEST['latitude'], $_REQUEST['longitude']);
+        if(isset($_GET['latitude']) && isset($_GET['longitude'])) {
+            $position = new Point($_GET['latitude'], $_GET['longitude']);
             $template = 'result.php';
         } else {
             $template = 'form.php';
