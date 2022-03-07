@@ -11,6 +11,14 @@
 <main>
 
     <form>
+
+        <?php
+
+            if($error){
+                echo "<p class='error'>" . $error . "</p>";
+            }
+
+        ?>
         <label for="latitude">Latitude</label>
         <input type="text" name="latitude" id="latitude">
 
