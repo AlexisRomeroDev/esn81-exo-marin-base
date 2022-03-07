@@ -5,9 +5,9 @@ namespace App;
 class Response
 {
 
-    protected string $content = '';
-    protected array $headers = [];
-    protected int $statusCode = 200;
+    public string $content = '';
+    public array $headers = [];
+    public int $statusCode = 200;
 
 
     public function __construct($content, $headers, $statusCode)
@@ -23,7 +23,7 @@ class Response
         foreach ($this->headers as $key => $value){
             header($key.':'.$value);
         }
-        echo $this->content;
+        echo json_encode($this->content);
 
     }
 
