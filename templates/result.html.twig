@@ -11,9 +11,9 @@
 <main>
 
     <p>Nous avons reçu votre nouvelle position :</p>
-    <p class="latitude">Latitude : <?=$position->latitude;?></p>
-    <p class="longitude">Longitude : <?=$position->longitude;?></p>
-    <p class="hemisphere">Hémisphère : <?=$position->isNorth() ? 'Nord' : 'Sud';?></p>
+    <p class="latitude">Latitude : {{position.latitude}}</p>
+    <p class="longitude">Longitude : {{position.longitude}}</p>
+    <p class="hemisphere">Hémisphère : {{ (position.isNorth) ? 'Nord' : 'Sud' }}</p>
 
     <a href="index.php">Envoyer votre position</a>
 

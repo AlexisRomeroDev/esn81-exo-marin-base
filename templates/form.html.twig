@@ -13,13 +13,10 @@
 
         <form>
 
-            <?php
+            {% if error is defined %}
+                <p class='error'>{{error}}</p>
+            {% endif %}
 
-            if (isset($error)) {
-                echo "<p class='error'>" . $error . "</p>";
-            }
-
-            ?>
             <label for="latitude">Latitude</label>
             <input type="text" name="latitude" id="latitude">
 

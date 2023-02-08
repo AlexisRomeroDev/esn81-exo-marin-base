@@ -4,29 +4,39 @@ namespace App;
 
 use App\Point;
 use App\Response;
+use Twig\Environment;
 
 class PositionController
 {
 
-    public function displayForm()
+    private Environment $twig;
+
+    public function __construct($twig)
     {
 
-        $template = 'form.php';
+        $this->twig = $twig;
+    }
+
+    public function run()
+    {
 
         if (isset($_GET['latitude']) && isset($_GET['longitude'])) {
-            try {
-                $position = new Point($_GET['latitude'], $_GET['longitude']);
-                $template = 'result.php';
-            } catch (\Exception $e) {
-                $error = $e->getMessage();
-            }
-        }
 
-        ob_start();
-        $path = 'templates/' . $template;
-        require($path);
-        $content = ob_get_contents();
-        ob_end_clean();
+            try {
+
+                $position = new Point($_GET['latitude'], $_GET['longitude']);
+
+                $content = $this->twig->render('result.html.twig', ['position' => $position]);
+            } catch (\Exception $e) {
+
+                $error = $e->getMessage();
+
+                $content = $this->twig->render('form.html.twig', ['error' => $error]);
+            }
+        } else {
+
+            $content = $this->twig->render('form.html.twig');
+        }
 
         $response = new Response(
             $content,
