@@ -22,13 +22,14 @@ class PositionControllerTest extends TestCase
     {
 
         $_GET['latitude'] = '1';
-        $_GET['longitude'] = '1';
+        $_GET['longitude'] = '2';
 
         $controller = new PositionController($this->getTwig());
 
         $response = $controller->run();
 
-        $this->assertStringContainsString("1", $response->getContent());
+        $this->assertStringContainsString("Latitude : 1", $response->getContent());
+        $this->assertStringContainsString("Longitude : 2", $response->getContent());
 
         $this->assertEquals(200, $response->getStatusCode());
 
@@ -46,7 +47,7 @@ class PositionControllerTest extends TestCase
 
         $response = $controller->run();
 
-        $this->assertStringContainsString("Nord", $response->getContent());
+        $this->assertStringContainsString("Hémisphère : Nord", $response->getContent());
     }
 
     public function test_South_hemisphere_is_determinated()
@@ -58,6 +59,6 @@ class PositionControllerTest extends TestCase
 
         $response = $controller->run();
 
-        $this->assertStringContainsString("Sud", $response->getContent());
+        $this->assertStringContainsString("Hémisphère : Sud", $response->getContent());
     }
 }
