@@ -6,16 +6,27 @@ use App\HelloController;
 use App\PositionController;
 use PHPUnit\Framework\TestCase;
 
+require __DIR__ . '/../vendor/autoload.php';
+
 class PositionControllerTest extends TestCase
 {
 
-    public function test_coord_are_displayed(){
+    public function getTwig()
+    {
+        $loader = new \Twig\Loader\FilesystemLoader('templates');
+        $twig = new \Twig\Environment($loader, ['cache' => false, 'debug' => true]);
+        return $twig;
+    }
+
+    public function test_coord_are_displayed()
+    {
+
         $_GET['latitude'] = '1';
         $_GET['longitude'] = '1';
 
-        $controller = new PositionController( $_GET['latitude'],  $_GET['longitude']);
+        $controller = new PositionController($this->getTwig());
 
-        $response = $controller->displayForm();
+        $response = $controller->run();
 
         $this->assertStringContainsString("1", $response->getContent());
 
@@ -26,30 +37,27 @@ class PositionControllerTest extends TestCase
         $this->assertEquals('text/html', $content_type);
     }
 
-    public function test_North_hemisphere_is_determinated(){
+    public function test_North_hemisphere_is_determinated()
+    {
         $_GET['latitude'] = '1';
         $_GET['longitude'] = '1';
 
-        $controller = new PositionController( $_GET['latitude'],  $_GET['longitude']);
+        $controller = new PositionController($this->getTwig());
 
-        $response = $controller->displayForm();
+        $response = $controller->run();
 
         $this->assertStringContainsString("Nord", $response->getContent());
-
     }
 
-    public function test_South_hemisphere_is_determinated(){
+    public function test_South_hemisphere_is_determinated()
+    {
         $_GET['latitude'] = '-1';
         $_GET['longitude'] = '1';
 
-        $controller = new PositionController( $_GET['latitude'],  $_GET['longitude']);
+        $controller = new PositionController($this->getTwig());
 
-        $response = $controller->displayForm();
+        $response = $controller->run();
 
         $this->assertStringContainsString("Sud", $response->getContent());
-
     }
-
-
-
 }

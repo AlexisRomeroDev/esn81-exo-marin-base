@@ -6,7 +6,6 @@ error_reporting(E_ALL);
 
 require __DIR__ . '/vendor/autoload.php';
 
-require_once('./vendor/autoload.php');
 $loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig = new \Twig\Environment($loader, ['cache' => false, 'debug' => true]);
 $twig->addExtension(new \Twig\Extension\DebugExtension());
