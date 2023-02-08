@@ -10,16 +10,17 @@ use PHPUnit\Framework\TestCase;
 class PointTest extends TestCase
 {
 
-    public function test_Hemisphere_is_determined(){
+    public function test_Hemisphere_is_determined()
+    {
 
-        $point =  new Point(1,1);
+        // Partie 1 : Le contexte
 
-        $this->assertTrue($point->isNorth());
+        $pointA =  new Point(1, 1);
+        $pointB =  new Point(-1, 1);
 
-        $point =  new Point(-1,1);
+        // Partie 2 : Les assertions
 
-        $this->assertTrue(!$point->isNorth());
-
+        $this->assertTrue($pointA->isNorth());
+        $this->assertTrue(!$pointB->isNorth());
     }
-
 }
